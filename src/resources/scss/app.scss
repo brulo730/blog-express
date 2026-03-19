@@ -1,0 +1,23 @@
+@use "variables";
+//@use "base"; //chua cac hinh h1 h2 h3
+.button {
+  background-color: variables.$primary; 
+  @include variables.flex-center;
+}
+
+
+body { color: variables.$primary; } 
+
+h1{
+    background-color: cyan;
+    color: rgba(230, 15, 44, 0.675);
+}
+h2{
+    background-color: rgba(199, 21, 21, 0.684);
+    color: rgba(22, 150, 189, 0.881);
+}
+
+h3{
+    background-color: rgb(49, 243, 185);
+    color: rgb(229, 8, 8);
+}
