@@ -7,17 +7,7 @@ class SiteController {
     show(req, res) {
         res.render('search');
     }
-
 }
 
 //bắt buộc dùng export default instance của class // tại sao có () khi khởi tạo đối tượng
 export default new SiteController();
-
-
-
-
-
-
-
-
-
