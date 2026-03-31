@@ -1,23 +1,69 @@
-@use "variables";
+@use 'variables';
 //@use "base"; //chua cac hinh h1 h2 h3
 .button {
-  background-color: variables.$primary; 
-  @include variables.flex-center;
+    background-color: variables.$primary;
+    @include variables.flex-center;
 }
 
+body {
+    color: variables.$primary;
 
-body { color: variables.$primary; } 
-
-h1{
-    background-color: cyan;
-    color: rgba(230, 15, 44, 0.675);
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
 }
-h2{
-    background-color: rgba(199, 21, 21, 0.684);
-    color: rgba(22, 150, 189, 0.881);
+header {
+    display: flex; /* nằm 1 hàng */
 }
+.course-card {
+    width: 350px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
 
-h3{
-    background-color: rgb(49, 243, 185);
-    color: rgb(229, 8, 8);
+    .course-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .course-content {
+        padding: 16px;
+
+        .card-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .btn {
+            display: inline-block;
+            background: #1976f2;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0d5bd1;
+        }
+    }
+    a {
+        text-decoration: none !important; /* Bỏ gạch chân */
+        color: inherit; /* Giữ màu chữ giống thẻ cha, không bị đổi sang màu xanh link */
+    }
+
+    /* Hiệu ứng khi di chuột vào (tùy chọn) */
+    a:hover {
+        color: #007bff;
+    }
 }

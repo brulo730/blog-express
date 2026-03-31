@@ -5,7 +5,7 @@ import siteController from '../app/controllers/siteController.js';
 const router = express.Router();
 
 // Tuyến đường chi tiết phải xếp trên tuyến đường gốc '/'
-router.get('/:slug', siteController.show);
+// router.get('/:slug', siteController.show);
 router.get('/', siteController.index);
 
 export default router;

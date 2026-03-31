@@ -1,11 +1,10 @@
 import express from 'express';
-import daemonController from '../app/controllers/daemonController.js';
+import courseController from '../app/controllers/courseController.js';
 
 // Khởi tạo mini-app router
 const router = express.Router();
 
 // Tuyến đường chi tiết phải xếp trên tuyến đường gốc '/'
-// router.get('/:slug', daemonController.daemon);
-router.get('/', daemonController.daemon);
-
+router.get('/:slug', courseController.show);
+// router.get('/', courseController.show);
 export default router;

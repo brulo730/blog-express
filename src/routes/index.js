@@ -1,12 +1,16 @@
 import newsRouter from './news.js';
 import siteRouter from './site.js';
 import daemonRouter from './daemon.js';
+import courseRouter from './course.js';
 
-function route(app){
-    // Khi request bắt đầu bằng '/news', hãy giao cho news router xử lý 
+function route(app) {
+    // Khi request bắt đầu bằng '/news', hãy giao cho news router xử lý
     app.use('/news', newsRouter);
-    app.use('/daemon', daemonRouter)
+    app.use('/daemon', daemonRouter);
+    app.use('/course', courseRouter);
+
     app.use('/', siteRouter);
+
     // Các tuyến đường chung khác chưa cần tách Router vội
     // app.get('/daemon', (req, res) => {
     //     res.render('news');

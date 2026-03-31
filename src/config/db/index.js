@@ -14,7 +14,5 @@ async function connect() {
         console.error('[SYSTEM] Lỗi kết nối Database:', error);
     }
 }
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 export default { connect };

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 // Định nghĩa khung xương (Schema) cho một Khóa học
 const Course = new Schema({
