@@ -5,6 +5,9 @@ import courseController from '../app/controllers/courseController.js';
 const router = express.Router();
 
 // Tuyến đường chi tiết phải xếp trên tuyến đường gốc '/'
+router.get('/create', courseController.create);
+router.post('/store', courseController.store);
 router.get('/:slug', courseController.show);
 // router.get('/', courseController.show);
+
 export default router;
