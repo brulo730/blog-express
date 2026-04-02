@@ -17,7 +17,7 @@ class DaemonController {
             //     const courses = await Course.find({});
             res.json(courses);
         } catch (error) {
-            res.status(400).json({ error: 'Lỗi' });
+            res.status(500).json({ error: 'Lỗi' });
         }
     }
 }

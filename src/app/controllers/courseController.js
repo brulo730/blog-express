@@ -5,40 +5,42 @@ import {
 } from '../../util/mongoose.js';
 
 class CourseController {
-    // Using promise chaining
-    show(req, res, next) {
-        // 1. Sửa thành req.params
-        // 2. Xóa dấu ; sau hàm findOne để chuỗi Promise không bị ngắt
-        // Get /source/:slug
-        Course.findOne({ slug: req.params.slug })
-            .then((course) => {
-                res.render('courses/show', {
-                    course: mongooseToObject(course),
-                });
-            })
-            .catch(next);
+    // async/await - a promise //router.get('/:slug', courseController.show); //render: show.hbs | Get /source/:slug
+    async show(req, res, next) {
+        try {
+            const course = await Course.findOne({ slug: req.params.slug });
+            res.render('courses/show', { course: mongooseToObject(course) });
+        } catch {
+            // next(error);
+            res.status(500).json({
+                success: false,
+                message: 'Internal Server Error. Please try again later.',
+            });
+        }
     }
-
-    // async show(req, res, next) {
-
-    //         const Course = await Course.findOne({slug: req.params.slug,})
-    // }
+    //const Course = await Course.findOne({ slug: req.params.slug }); BUG1
+    //res.render('courses/show', { course: mongooseToObject(course) }); Gọi file giao diện có tên show.hbs (nằm trong thư mục views/courses/
+    // catch(error) {} BUG3 -> lý do browser trả về màn hình trắng , catch nuối log error như black hole BUG3
 
     // // GET /course/create
     create(req, res, next) {
-        res.render('courses/create');
+        res.render('courses/create'); //('courses/create'); path folder absolute direct creat.hbs
     }
-    // POST /course/store
+
+    // POST /course/store   // res.json(req.body);
     async store(req, res, next) {
-        // res.json(req.body);
-        const course = new Course(req.body);
-        await course.save();
-        res.send('Đã lưu vào database mongodb atlas');
-        console.error('Database save Error ', error);
-        // next(error);
-        res.status(500).send(
-            'Internal Server error : Could not save the course',
-        );
+        try {
+            const formData = req.body;
+            formData.image = `https://img.youtube.com/vi/${req.body.videoId}/hqdefault.jpg`;
+            const course = new Course(formData);
+            await course.save(formData); // .save after build dataDocument course
+            res.redirect('/');
+        } catch {
+            res.status(500).json({
+                success: false,
+                message: 'Internal Server Error. Please try again later.',
+            });
+        }
     }
 }
 

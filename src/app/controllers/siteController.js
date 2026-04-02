@@ -5,18 +5,30 @@ import {
 } from '../../util/mongoose.js';
 
 class SiteController {
-    index(req, res, next) {
-        //? chưa hiểu đoạn mã dưới làm gì
-        Course.find({})
-            .then((courses) => {
-                // courses = courses.map((course) => course.toObject());
-                //courses trong mutipleMongooseToObject()? thiếu thì bị lỗi
-                res.render('home', {
-                    courses: mutipleMongooseToObject(courses),
-                });
-            })
-            .catch(next);
+    //router.get('/', siteController.index); | GET
+    // index(req, res, next) {
+    //     //? chưa hiểu đoạn mã dưới làm gì
+    //     Course.find({})
+    //         .then((courses) => {
+    //             res.render('home', {
+    //                 courses: mutipleMongooseToObject(courses),
+    //             });
+    //         })
+    //         .catch(next);
+    // }
+    async index(req, res, next) {
+        try {
+            // courses document == property courses obj == mutipleMongooseToObject(courses)
+            const courses = await Course.find({}); //Course.find({})?
+            res.render('home', { courses: mutipleMongooseToObject(courses) });
+        } catch {
+            res.status(500).json({
+                success: false,
+                message: 'Internal Server Error. Please try again later.',
+            });
+        }
     }
+
     // show(req, res) {
     //     res.render('search');
     // }
@@ -27,6 +39,3 @@ export default new SiteController();
 
 //  Luồng dữ liệu chạy như sau:
 //     Course.find({}): Đi vào Database lấy dữ liệu.
-//     .then((courses) => { ... }): Database trả về một danh sách, đặt tên là courses.
-//     mutipleMongooseToObject(courses): Chuyển danh sách courses đó từ dạng "Mongoose Document" sang "Plain Object" để Handlebars có thể đọc được.
-//     res.render('home', { courses: ... }): Đẩy dữ liệu sạch đó sang file home.handlebars.
